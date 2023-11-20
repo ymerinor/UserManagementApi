@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UserManagement.Application.Interface;
+using UserManagement.Domain.User;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,49 @@ namespace UserManagement.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        public readonly IUserManagementService _userManagementService;
+
+        public UserController(IUserManagementService userManagementService)
+        {
+            _userManagementService = userManagementService;
+        }
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<Users>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _userManagementService.ListarAsync();
         }
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            return "value";
+            var resultadoConsulta = await _userManagementService.BuscarPorIdAsync(id);
+            return Ok(resultadoConsulta);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] Users users)
         {
+            await _userManagementService.CrearAsync(users);
+            return Ok(users);
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Put([FromBody] Users users)
         {
+            await _userManagementService.EditarAsync(users);
+            return Ok(users);
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(Guid id)
         {
+            await _userManagementService.EliminarAsync(id);
+            return Ok();
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UserManagement.Domain.Entity;
 using UserManagement.Domain.Repository.Interface;
+using UserManagement.Domain.User;
 
 namespace UserManagement.Infrastructure.Repositories
 {
     /// <summary>
     /// Repositorio para realizar operaciones CRUD en la entidad User.
     /// </summary>
-    public class UserRepository : IRepositoryBase<User, Guid>
+    public class UserRepository : IRepositoryBase<Users, Guid>
     {
         private readonly UserManagementDbContext _context;
 
@@ -25,7 +25,7 @@ namespace UserManagement.Infrastructure.Repositories
         /// </summary>
         /// <param name="entidad">Identificador del usuario a buscar.</param>
         /// <returns>Una tarea que representa la operación asincrónica. La tarea devuelve el usuario encontrado o null si no se encuentra.</returns>
-        public async Task<User> BuscarPorIdAsync(Guid entidad)
+        public async Task<Users> BuscarPorIdAsync(Guid entidad)
         {
             var resultadoConsulta = await _context.Usuarios.Where(t => t.Id == entidad).FirstOrDefaultAsync();
             return resultadoConsulta;
@@ -36,7 +36,7 @@ namespace UserManagement.Infrastructure.Repositories
         /// </summary>
         /// <param name="entidad">Usuario a crear.</param>
         /// <returns>Una tarea que representa la operación asincrónica.</returns>
-        public async Task CrearAsync(User entidad)
+        public async Task CrearAsync(Users entidad)
         {
             entidad.Id = Guid.NewGuid();
             _context.Usuarios.Add(entidad);
@@ -48,7 +48,7 @@ namespace UserManagement.Infrastructure.Repositories
         /// </summary>
         /// <param name="entidad">Usuario con las actualizaciones.</param>
         /// <returns>Una tarea que representa la operación asincrónica.</returns>
-        public async Task EditarAsync(User entidad)
+        public async Task EditarAsync(Users entidad)
         {
             var usuarioSeleccionado = await _context.Usuarios.Where(t => t.Id == entidad.Id).FirstOrDefaultAsync();
             if (usuarioSeleccionado != null)
@@ -80,7 +80,7 @@ namespace UserManagement.Infrastructure.Repositories
         /// Obtiene una lista de todos los usuarios.
         /// </summary>
         /// <returns>Una tarea que representa la operación asincrónica. La tarea devuelve una colección de usuarios.</returns>
-        public async Task<IEnumerable<User>> ListarAsync()
+        public async Task<IEnumerable<Users>> ListarAsync()
         {
             return await _context.Usuarios.ToListAsync();
         }

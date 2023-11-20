@@ -1,5 +1,5 @@
 ﻿using UserManagement.Application.Interface;
-using UserManagement.Domain.Entity;
+using UserManagement.Domain.User;
 
 namespace UserManagement.Application.Services
 {
@@ -20,19 +20,19 @@ namespace UserManagement.Application.Services
         }
 
         /// <inheritdoc />
-        public async Task<User> BuscarPorIdAsync(Guid entidadId)
+        public async Task<Users> BuscarPorIdAsync(Guid entidadId)
         {
             return await _userManaementService.BuscarPorIdAsync(entidadId);
         }
 
         /// <inheritdoc />
-        public async Task CrearAsync(User entidad)
+        public async Task CrearAsync(Users entidad)
         {
             await _userManaementService.CrearAsync(entidad);
         }
 
         /// <inheritdoc />
-        public async Task EditarAsync(User entidad)
+        public async Task EditarAsync(Users entidad)
         {
             await _userManaementService.EditarAsync(entidad);
         }
@@ -44,7 +44,7 @@ namespace UserManagement.Application.Services
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<User>> ListarAsync()
+        public async Task<IEnumerable<Users>> ListarAsync()
         {
             return await _userManaementService.ListarAsync();
         }

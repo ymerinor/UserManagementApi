@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UserManagement.Domain.Entity;
+using UserManagement.Domain.User;
 
 namespace UserManagement.Infrastructure
 {
@@ -19,7 +19,7 @@ namespace UserManagement.Infrastructure
         /// <summary>
         /// Obtiene o establece el DbSet para la entidad Usuario.
         /// </summary>
-        public DbSet<User> Usuarios { get; set; }
+        public DbSet<Users> Usuarios { get; set; }
 
 
         // <summary>

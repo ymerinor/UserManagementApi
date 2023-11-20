@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace UserManagement.Domain.Entity
+namespace UserManagement.Domain.User
 {
     /// <summary>
     /// Representa a un usuario en el sistema.
     /// </summary>
-    public class User
+    public class Users
     {
         /// <summary>
         /// Obtiene o establece el identificador único del usuario.
