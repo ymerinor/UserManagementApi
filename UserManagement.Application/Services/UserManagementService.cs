@@ -6,15 +6,15 @@ namespace UserManagement.Application.Services
     /// <summary>
     /// Implementación del servicio de gestión de usuarios.
     /// </summary>
-    public class UserManagementService : IUserManaementService
+    public class UserManagementService : IUserManagementService
     {
-        private readonly IUserManaementService _userManaementService;
+        private readonly IUserManagementService _userManaementService;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UserManagementService"/>.
         /// </summary>
         /// <param name="userManaementService">Servicio para manejo de usuarios</param>
-        public UserManagementService(IUserManaementService userManaementService)
+        public UserManagementService(IUserManagementService userManaementService)
         {
             _userManaementService = userManaementService;
         }

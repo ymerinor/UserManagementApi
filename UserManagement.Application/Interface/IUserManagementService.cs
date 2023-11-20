@@ -5,7 +5,7 @@ namespace UserManagement.Application.Interface
     /// <summary>
     /// Interfaz para el servicio de gestión de usuarios.
     /// </summary>
-    public interface IUserManaementService : IServiceBase<User, Guid>
+    public interface IUserManagementService : IServiceBase<User, Guid>
     {
     }
 }
