@@ -2,7 +2,12 @@
 
 namespace UserManagement.Application.Interface
 {
-    internal interface IServiceBase<TEntidad, TEntidadID> : IRepositoryBase<TEntidad, TEntidadID>, IList<TEntidad, TEntidadID>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntidad"></typeparam>
+    /// <typeparam name="TEntidadID"></typeparam>
+    public interface IServiceBase<TEntidad, TEntidadID> : IRepositoryBase<TEntidad, TEntidadID>, IList<TEntidad, TEntidadID>
     {
     }
 }

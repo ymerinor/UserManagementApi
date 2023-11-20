@@ -2,8 +2,8 @@
 {
     public interface IRepositoryBase<TEntidad, TEntidadID> : IList<TEntidad, TEntidadID>
     {
-        void Crear(TEntidad entidad);
-        void Editar(TEntidad entidad);
-        void Eliminar(TEntidadID entidadId);
+        Task CrearAsync(TEntidad entidad);
+        Task EditarAsync(TEntidad entidad);
+        Task EliminarAsync(TEntidadID entidadId);
     }
 }
