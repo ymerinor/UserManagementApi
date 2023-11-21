@@ -11,11 +11,8 @@ namespace UserManagement.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<UserManagementDbContext>(options =>
-                    options.UseSqlServer(
-                        configuration.GetConnectionString("UserManagementConnection"),
-                        b => b.MigrationsAssembly(typeof(UserManagementDbContext).Assembly.FullName)));
+                    options.UseSqlServer(configuration.GetConnectionString("UserManagementConnection")));
 
-            services.AddScoped<UserManagementDbContext>(provider => provider.GetRequiredService<UserManagementDbContext>());
             services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }

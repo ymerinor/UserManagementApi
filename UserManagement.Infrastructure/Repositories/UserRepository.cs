@@ -27,7 +27,7 @@ namespace UserManagement.Infrastructure.Repositories
         /// <returns>Una tarea que representa la operación asincrónica. La tarea devuelve el usuario encontrado o null si no se encuentra.</returns>
         public async Task<Users> BuscarPorIdAsync(Guid entidad)
         {
-            var resultadoConsulta = await _context.Usuarios.Where(t => t.Id == entidad).FirstOrDefaultAsync();
+            var resultadoConsulta = await _context.Users.Where(t => t.Id == entidad).FirstOrDefaultAsync();
             return resultadoConsulta;
         }
 
@@ -39,7 +39,7 @@ namespace UserManagement.Infrastructure.Repositories
         public async Task CrearAsync(Users entidad)
         {
             entidad.Id = Guid.NewGuid();
-            _context.Usuarios.Add(entidad);
+            _context.Users.Add(entidad);
             await _context.SaveChangesAsync();
         }
 
@@ -50,12 +50,12 @@ namespace UserManagement.Infrastructure.Repositories
         /// <returns>Una tarea que representa la operación asincrónica.</returns>
         public async Task EditarAsync(Users entidad)
         {
-            var usuarioSeleccionado = await _context.Usuarios.Where(t => t.Id == entidad.Id).FirstOrDefaultAsync();
+            var usuarioSeleccionado = await _context.Users.Where(t => t.Id == entidad.Id).FirstOrDefaultAsync();
             if (usuarioSeleccionado != null)
             {
-                usuarioSeleccionado.Nombre = entidad.Nombre;
-                usuarioSeleccionado.Correo = entidad.Correo;
-                usuarioSeleccionado.Edad = entidad.Edad;
+                usuarioSeleccionado.Name = entidad.Name;
+                usuarioSeleccionado.Email = entidad.Email;
+                usuarioSeleccionado.Age = entidad.Age;
                 _context.Entry(usuarioSeleccionado).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
@@ -68,10 +68,10 @@ namespace UserManagement.Infrastructure.Repositories
         /// <returns>Una tarea que representa la operación asincrónica.</returns>
         public async Task EliminarAsync(Guid entidadId)
         {
-            var usuarioEliminar = await _context.Usuarios.Where(t => t.Id == entidadId).FirstOrDefaultAsync();
+            var usuarioEliminar = await _context.Users.Where(t => t.Id == entidadId).FirstOrDefaultAsync();
             if (usuarioEliminar != null)
             {
-                _context.Usuarios.Remove(usuarioEliminar);
+                _context.Users.Remove(usuarioEliminar);
                 await _context.SaveChangesAsync();
             }
         }
@@ -82,7 +82,7 @@ namespace UserManagement.Infrastructure.Repositories
         /// <returns>Una tarea que representa la operación asincrónica. La tarea devuelve una colección de usuarios.</returns>
         public async Task<IEnumerable<Users>> ListarAsync()
         {
-            return await _context.Usuarios.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
     }
 }

@@ -16,23 +16,23 @@ namespace UserManagement.Domain.User
         /// Obtiene o establece el nombre del usuario.
         /// </summary>
         [Required]
-        public string Nombre { get; set; } = null!;
+        public string Name { get; set; } = null!;
 
         /// <summary>
         /// Obtiene o establece la dirección de correo electrónico del usuario.
         /// </summary>
         [Required]
-        public string Correo { get; set; } = null!;
+        public string Email { get; set; } = null!;
 
         /// <summary>
         /// Obtiene o establece la edad del usuario.
         /// </summary>
         [Required]
-        public int Edad { get; set; }
+        public int Age { get; set; }
 
         /// <summary>
         /// Obtiene o establece la nacionalidad del usuario.
         /// </summary>
-        public string Nacionalidad { get; set; } = string.Empty;
+        public string Nationality { get; set; } = string.Empty;
     }
 }

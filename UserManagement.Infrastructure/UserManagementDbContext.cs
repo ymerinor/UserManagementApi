@@ -19,7 +19,7 @@ namespace UserManagement.Infrastructure
         /// <summary>
         /// Obtiene o establece el DbSet para la entidad Usuario.
         /// </summary>
-        public DbSet<Users> Usuarios { get; set; }
+        public DbSet<Users> Users { get; set; }
 
 
         // <summary>
