@@ -12,7 +12,7 @@ Asegúrate de tener Docker y Docker Compose instalados en tu máquina antes de c
 2. Ejecuta el siguiente comando para cargar la base de datos usando Docker Compose:
    ```bash
    docker-compose up -d
-2. Eejutar el archivo llamdo UserManagemen para crear la base de datos del proyecto.
+2. Eejutar el archivo llamdo ###UserManagemen para crear la base de datos del proyecto.
 
 ### Paso 2: Ejecucion del proyecto
 1. Para ejecutar el proyecto se deja un usuario por defecto y poder obtener el token de acceso: Usuario: yeinermeri@gmail.com -- > Password: 0123456789, este es el unico usuario parametrizado.
