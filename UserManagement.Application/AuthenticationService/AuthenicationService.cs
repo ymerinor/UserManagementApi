@@ -3,12 +3,16 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using UserManagement.Application.AuthenticationService.Dto;
 using UserManagement.Application.AuthenticationService.Interface;
 
 namespace UserManagement.Application.AuthenticationService
 {
     public class AuthenicationService : IAuthenicationService
     {
+        /// <summary>
+        /// Dependencia de IConfiguration
+        /// </summary>
         private readonly IConfiguration _configuration;
 
         /// <summary>
@@ -21,10 +25,17 @@ namespace UserManagement.Application.AuthenticationService
         }
 
         /// <inheritdoc/>
-        public bool Login(string username, string password)
+        public string Login(UserLoginDto userLoginDto)
         {
-            var userIdValid = username.Equals("yeinermeri@gmail.com") && password.Equals("0123456789");
-            return userIdValid;
+            var userIdValid = userLoginDto.Email.Equals("yeinermeri@gmail.com") && userLoginDto.Password.Equals("0123456789");
+            if (!userIdValid)
+            {
+                throw new UnauthorizedAccessException("usuario  o contraseña invalide.");
+            }
+
+            var token = GetToken(userLoginDto.Email);
+
+            return token;
         }
 
         /// <inheritdoc/>
@@ -39,7 +50,7 @@ namespace UserManagement.Application.AuthenticationService
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = claims,
-                Expires = DateTime.UtcNow.AddMinutes(5),
+                Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(jwtSecretKetBytes), SecurityAlgorithms.HmacSha256Signature)
             };
 

@@ -1,4 +1,5 @@
-﻿using UserManagement.Application.UsersServices.Interface;
+﻿using UserManagement.Application.Common.Models;
+using UserManagement.Application.UsersServices.Interface;
 using UserManagement.Domain.Repository.Interface;
 using UserManagement.Domain.User;
 
@@ -26,21 +27,34 @@ namespace UUserManagement.Application.UsersServices
         }
 
         /// <inheritdoc />
-        public async Task CrearAsync(Users entidad)
+        public async Task<Users> CrearAsync(Users users)
         {
-            await _userRepository.CrearAsync(entidad);
+            return await _userRepository.CrearAsync(users);
         }
 
         /// <inheritdoc />
-        public async Task EditarAsync(Users entidad)
+        public async Task EditarAsync(Users users)
         {
-            await _userRepository.EditarAsync(entidad);
+            await _userRepository.EditarAsync(users);
         }
 
         /// <inheritdoc />
-        public async Task EliminarAsync(Guid entidadId)
+        public async Task EliminarAsync(Guid idUser)
         {
-            await _userRepository.EliminarAsync(entidadId);
+            await _userRepository.EliminarAsync(idUser);
+        }
+        /// <inheritdoc />
+        public async Task<PagedResult<Users>> ListadoPaginado(int page, int pageSize)
+        {
+            var informacion = await _userRepository.ListarAsync();
+            var resultadoPaginado = informacion.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            return new PagedResult<Users>
+            {
+                Data = resultadoPaginado,
+                Page = page,
+                PageSize = pageSize,
+                TotalItems = informacion.Count()
+            };
         }
 
         /// <inheritdoc />

@@ -36,11 +36,12 @@ namespace UserManagement.Infrastructure.Repositories
         /// </summary>
         /// <param name="entidad">Usuario a crear.</param>
         /// <returns>Una tarea que representa la operación asincrónica.</returns>
-        public async Task CrearAsync(Users entidad)
+        public async Task<Users> CrearAsync(Users entidad)
         {
             entidad.Id = Guid.NewGuid();
             _context.Users.Add(entidad);
             await _context.SaveChangesAsync();
+            return entidad;
         }
 
         /// <summary>

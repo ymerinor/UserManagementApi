@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UserManagement.Application.UsersServices.Interface;
 using UserManagement.Domain.User;
 
@@ -8,6 +9,7 @@ namespace UserManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         public readonly IUserManagementService _userManagementService;
@@ -40,7 +42,7 @@ namespace UserManagement.Controllers
         }
 
         // PUT api/<UserController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<ActionResult> Put([FromBody] Users users)
         {
             await _userManagementService.EditarAsync(users);
@@ -53,6 +55,13 @@ namespace UserManagement.Controllers
         {
             await _userManagementService.EliminarAsync(id);
             return Ok();
+        }
+
+        [HttpGet("paginado")]
+        public async Task<IActionResult> GetUsers([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        {
+            var users = await _userManagementService.ListadoPaginado(page, pageSize);
+            return Ok(users);
         }
     }
 }
