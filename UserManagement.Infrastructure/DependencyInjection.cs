@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using UserManagement.Domain.Repository.Interface;
+using UserManagement.Infrastructure.Repositories;
 
 namespace UserManagement.Infrastructure
 {
@@ -12,6 +14,9 @@ namespace UserManagement.Infrastructure
                     options.UseSqlServer(
                         configuration.GetConnectionString("UserManagementConnection"),
                         b => b.MigrationsAssembly(typeof(UserManagementDbContext).Assembly.FullName)));
+
+            services.AddScoped<UserManagementDbContext>(provider => provider.GetRequiredService<UserManagementDbContext>());
+            services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
     }

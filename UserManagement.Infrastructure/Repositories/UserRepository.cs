@@ -7,7 +7,7 @@ namespace UserManagement.Infrastructure.Repositories
     /// <summary>
     /// Repositorio para realizar operaciones CRUD en la entidad User.
     /// </summary>
-    public class UserRepository : IRepositoryBase<Users, Guid>
+    public class UserRepository : IUserRepository
     {
         private readonly UserManagementDbContext _context;
 

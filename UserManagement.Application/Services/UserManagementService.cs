@@ -1,4 +1,5 @@
 ﻿using UserManagement.Application.Interface;
+using UserManagement.Domain.Repository.Interface;
 using UserManagement.Domain.User;
 
 namespace UserManagement.Application.Services
@@ -8,13 +9,12 @@ namespace UserManagement.Application.Services
     /// </summary>
     public class UserManagementService : IUserManagementService
     {
-        private readonly IUserManagementService _userManaementService;
-
+        private IUserRepository _userManaementService;
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UserManagementService"/>.
         /// </summary>
         /// <param name="userManaementService">Servicio para manejo de usuarios</param>
-        public UserManagementService(IUserManagementService userManaementService)
+        public UserManagementService(IUserRepository userManaementService)
         {
             _userManaementService = userManaementService;
         }
