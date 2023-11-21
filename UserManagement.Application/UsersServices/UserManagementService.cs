@@ -1,8 +1,8 @@
-﻿using UserManagement.Application.Interface;
+﻿using UserManagement.Application.UsersServices.Interface;
 using UserManagement.Domain.Repository.Interface;
 using UserManagement.Domain.User;
 
-namespace UserManagement.Application.Services
+namespace UUserManagement.Application.UsersServices
 {
     /// <summary>
     /// Implementación del servicio de gestión de usuarios.
