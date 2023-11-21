@@ -1,4 +1,5 @@
-﻿using UserManagement.Application.Common.Models;
+﻿using UserManagement.Application.Common.Exceptions;
+using UserManagement.Application.Common.Models;
 using UserManagement.Application.UsersServices.Interface;
 using UserManagement.Domain.Repository.Interface;
 using UserManagement.Domain.User;
@@ -29,6 +30,8 @@ namespace UUserManagement.Application.UsersServices
         /// <inheritdoc />
         public async Task<Users> CrearAsync(Users users)
         {
+            if (string.IsNullOrEmpty(users.Email) || string.IsNullOrEmpty(users.Name))
+                throw new InvalidInformationException("el name o email  no puede ser vacios o null");
             return await _userRepository.CrearAsync(users);
         }
 
